@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<title></title>
+
+
+
+</head>
+<body>
+    <style>
+        .logos {
+    display: inline-flex;
+}
+
+table {
+    max-width: 500px !important;
+}
+.avatar {
+    width:67px !important;
+}
+.orangehr{
+    background-color: rgb(232, 100, 4);
+   font-size: 2pt;
+}
+table { 
+    border-collapse: collapse; 
+}
+.disclaimer{
+    
+color: gray;word-break: break-word;max-width: 200px;}
+
+.title {
+    
+color: rgb(232, 100, 4);}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9pt;
+}
+
+    </style>
+<table>
+<tr>
+    <td colspan="2"><div id="logos">
+        <img src="https://github.com/fireball8931/aolccbc.com/raw/main/www/staff/logos/aolcc.png" />
+        <img src="https://github.com/fireball8931/aolccbc.com/raw/main/www/staff/logos/ptib.jpg" />
+        <img src="https://github.com/fireball8931/aolccbc.com/raw/main/www/staff/logos/eqa.jpg" />
+        </div></td>
+</tr>
+<tr id="sigblock">
+<td rowspan=5 id="avatar" class="avatar"></td>
+<tr><td id="name">Name</td></tr>
+<tr><td id="title">Title</td></tr>
+<tr><td class="title" id="campus">Campus</td></tr>
+</tr>
+<tr>
+    <td> &nbsp;</td>
+</tr>
+<tr>
+    <td colspan="2" id="phonefax"> &nbsp;Phone: | Fax: </td>
+</tr>
+<tr>
+    <td colspan="2" id="tf"> &nbsp;TF: </td>
+    
+</tr>
+<tr>
+    <td colspan=2  id="email"> &nbsp;Email: </td>
+</tr>
+<tr>
+    <td colspan=2  id="address"> &nbsp;Address: </td>
+</tr>
+<tr class="orangehr"><td  colspan=2> &nbsp;</td></tr>
+<tr>
+    <td  colspan=2  id="socialmedia"></td>
+</tr>
+<tr>
+    <td colspan=2 class="disclaimer">IMPORTANT: The contents of this email and any attachments are confidential. They are intended for the named recipient(s) only. If you have received this email by mistake, please notify the sender immediately and do not disclose the contents to anyone or make copies thereof.
+        </td>
+</tr>
+</table>
+
+
+<div class="container">
+    
+
+<div class="container" >
+<div class="container" >
+</div>
+</div>
+
+
+
+</div>
+<script>
+    console.log(window.location.search);
+let staff = window.location.search.replace("?","")
+let cellphone = "";
+fetch(staff + ".json")
+        .then(function(response) {
+            return response.json()
+        })
+        .then(function(data) {
+//            console.log(data)
+            document.getElementById('avatar').innerHTML = "<img src='https://github.com/fireball8931/aolccbc.com/raw/main/www/staff/avatars/" + staff + ".png' alt='Profile Picture'>";
+            document.getElementById('name').innerHTML = data.name;
+            document.getElementById('title').innerHTML = data.title;
+            document.getElementById('campus').innerHTML = `Academy of Learning Career College | ${data.campus}`;
+            document.getElementById('email').innerHTML = `<span class='title'>Email: </span> <a id='mailto'> ${data.email}</a>`;
+            document.getElementById('mailto').href = `mailto:${data.email}`;
+            //document.getElementById('phone').innerHTML = `Academy of Learning Career College ${data.campus}`;
+            if(data.cell !== undefined){
+               
+                cellphone = ` | <span class='title'>Cell: </span>${data.cell} `;
+            }
+            
+            
+            
+            let thecampus = data.campus;
+            fetch("campusinfo.json")
+            .then(function(response) {
+                return response.json()
+            }) 
+            .then(function(data){
+                data.campus.forEach(campus => {
+                    if(campus.name == thecampus ){
+                        document.getElementById('phonefax').innerHTML = "<span class='title'>Phone: </span>" + campus.phone + " | <span class='title'>Fax: </span>" + campus.fax;
+                        document.getElementById('address').innerHTML = "<span class='title'>Address: </span>" + campus.address;
+                        document.getElementById('tf').innerHTML = "<span class='title'>Toll Free: </span>" + campus.tf + cellphone;
+                        return; 
+                    }
+                });
+
+            });
+            
+              })
+
+
+</script>
+
+
+</body>
+
+</html>
