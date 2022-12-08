@@ -43,9 +43,9 @@ body{
 <table>
 <tr>
     <td colspan="2"><div id="logos">
-        <img src="https://github.com/fireball8931/aolccbc.com/raw/main/www/staff/logos/aolcc.png" />
-        <img src="https://github.com/fireball8931/aolccbc.com/raw/main/www/staff/logos/ptib.jpg" />
-        <img src="https://github.com/fireball8931/aolccbc.com/raw/main/www/staff/logos/eqa.jpg" />
+        <img src="logos/aolcc.png" />
+        <img src="logos/ptib.jpg" />
+        <img src="logos/eqa.jpg" />
         </div></td>
 </tr>
 <tr id="sigblock">
@@ -102,7 +102,7 @@ fetch(staff + ".json")
         })
         .then(function(data) {
 //            console.log(data)
-            document.getElementById('avatar').innerHTML = "<img src='https://github.com/fireball8931/aolccbc.com/raw/main/www/staff/avatars/" + staff + ".png' alt='Profile Picture'>";
+            document.getElementById('avatar').innerHTML = "<img src='avatars/" + staff + ".png' alt='Profile Picture'>";
             document.getElementById('name').innerHTML = data.name;
             document.getElementById('title').innerHTML = data.title;
             document.getElementById('campus').innerHTML = `Academy of Learning Career College | ${data.campus}`;
